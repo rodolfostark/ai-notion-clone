@@ -1,7 +1,11 @@
 'use client';
+import React from "react";
 import TypewriterComponent from "typewriter-effect";
 
-export default function TypewriterTitle() {
+type Props = {}
+
+// To-do: render emojis in typewriter for chrome
+export default function TypewriterTitle(props: Props) {
     return (
         <TypewriterComponent
             options={{
@@ -9,10 +13,10 @@ export default function TypewriterTitle() {
             }}
             onInit={(typewriter) => {
                 typewriter
-                    .typeString("🚀 Supercharged Productivity.")
+                    .typeString("Supercharged Productivity.")
                     .pauseFor(1000)
                     .deleteAll()
-                    .typeString("🤖 AI-Powered Insights.")
+                    .typeString("AI-Powered Insights.")
                     .start();
             }}
         />
