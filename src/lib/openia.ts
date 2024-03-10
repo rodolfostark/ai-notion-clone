@@ -1,14 +1,12 @@
-import { Configuration, OpenAIApi } from "openai-edge";
+import OpenAI from 'openai';
 
-const config = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY // This is also the default, can be omitted
 });
-
-const openai = new OpenAIApi(config);
 
 export async function generateImagePrompt(name: string) {
     try {
-        const response = await openai.createChatCompletion({
+        const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
                 {
@@ -21,9 +19,8 @@ export async function generateImagePrompt(name: string) {
                 }
             ],
         });
-        const data = await response.json();
-        const image_description = data.choices[0].message.content;
-        return image_description as string;
+        const image_description = response.choices[0].message;
+        return image_description;
     } catch (error) {
         console.log(error);
         throw error;
